@@ -1,0 +1,5 @@
+-neko diceware.n
+-main Diceware
+-cp .
+
+-cmd nekotools boot diceware.n
