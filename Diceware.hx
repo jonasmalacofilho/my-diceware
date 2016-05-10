@@ -1,4 +1,4 @@
-import DevRandom.*;
+
 import Math.log;
 import Std.parseInt;
 import Std.parseFloat;
@@ -8,7 +8,13 @@ class Diceware {
 
 	public static
 	function getWord():String {
-		var i = randomUInt( list.length );
+		var i = switch(Sys.systemName())
+		{
+			case "Windows":
+				WinRandom.randomUInt(list.length);
+			default:
+				DevRandom.randomUInt(list.length);
+		};
 		return list[i];
 	}
 
@@ -76,36 +82,6 @@ class Diceware {
 	function log2( n:Float ) {
 		return log(n)/log(2);
 	}
-
-	static
-	function randomExample() {
-		trace( "One random non negative integer: "+randomUInt() );
-		trace( "Another non negative random integer: "+randomUInt() );
-		trace( "One more non negative random integer: "+randomUInt() );
-		trace( "Yet another non negative random integer: "+randomUInt() );
-		trace( "One random non negative integer between 0 and 1000: "+randomUInt( 1000 ) );
-		trace( "Another non negative random integer between 0 and 1000: "+randomUInt( 1000 ) );
-		trace( "One more non negative random integer between 0 and 1000: "+randomUInt( 1000 ) );
-		trace( "Yet another non negative random integer between 0 and 1000: "+randomUInt( 1000 ) );
-
-		trace( "One random integer: "+randomInt() );
-		trace( "Another random integer: "+randomInt() );
-		trace( "One more random integer: "+randomInt() );
-		trace( "Yet another random integer: "+randomInt() );
-		trace( "One random integer between 0 and 1000: "+randomInt( 1000 ) );
-		trace( "Another random integer between 0 and 1000: "+randomInt( 1000 ) );
-		trace( "One more random integer between 0 and 1000: "+randomInt( 1000 ) );
-		trace( "Yet another random integer between 0 and 1000: "+randomInt( 1000 ) );
-
-		var dicewareSpace = list.length;
-		trace( "Diceware word count: "+dicewareSpace );
-
-		trace( 'One random integer between 0 and $dicewareSpace: '+randomUInt( dicewareSpace ) );
-		trace( 'Another random integer between 0 and $dicewareSpace: '+randomUInt( dicewareSpace ) );
-		trace( 'One more random integer between 0 and $dicewareSpace: '+randomUInt( dicewareSpace ) );
-		trace( 'Yet another random integer between 0 and $dicewareSpace: '+randomUInt( dicewareSpace ) );
-	}
-
 
 	static
 	var list:Array<String> = [
